@@ -1,43 +1,43 @@
 package org.example;
 
 import edu.uci.ics.jung.graph.SparseMultigraph;
+import org.example.adapter.JungGraphAdapter;
+import org.example.adapter.GraphAdapter;
 import org.example.graphTravelers.BfsGraphTraverser;
 import org.example.graphTravelers.DfsGraphTraverser;
 import org.example.graphTravelers.Traverser;
 
-import java.util.ArrayList;
 import java.util.List;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Create a graph
-        SparseMultigraph<Integer,String> graph = new SparseMultigraph<>();
+        // Create a JUNG graph
+        SparseMultigraph<Integer, String> jungGraph = new SparseMultigraph<>();
 
-        // Add vertices (using Integer nodes)
-        graph.addVertex(1);
-        graph.addVertex(2);
-        graph.addVertex(3);
-        graph.addVertex(4);
-        graph.addVertex(5);
+        jungGraph.addVertex(1);
+        jungGraph.addVertex(2);
+        jungGraph.addVertex(3);
+        jungGraph.addVertex(4);
+        jungGraph.addVertex(5);
 
-        // Add edges (using String identifiers)
-        graph.addEdge("E1", 1, 2); // Edge between Vertex 1 and Vertex 2
-        graph.addEdge("E2", 1, 3); // Edge between Vertex 1 and Vertex 3
-        graph.addEdge("E3", 2, 4); // Edge between Vertex 2 and Vertex 4
-        graph.addEdge("E4", 3, 5); // Edge between Vertex 3 and Vertex 5
-        graph.addEdge("E5", 4, 5); // Edge between Vertex 4 and Vertex 5
+        jungGraph.addEdge("E1", 1, 2); // Edge between Vertex 1 and Vertex 2
+        jungGraph.addEdge("E2", 1, 3); // Edge between Vertex 1 and Vertex 3
+        jungGraph.addEdge("E3", 2, 4); // Edge between Vertex 2 and Vertex 4
+        jungGraph.addEdge("E4", 3, 5); // Edge between Vertex 3 and Vertex 5
+        jungGraph.addEdge("E5", 4, 5); // Edge between Vertex 4 and Vertex 5
 
-        Traverser dfsGraphTraveler= new DfsGraphTraverser(graph);
-        Traverser bfsGraphTraveler= new BfsGraphTraverser(graph);
+        GraphAdapter<Integer, String> graphAdapter = new JungGraphAdapter(jungGraph);
 
+        // Create traversers using the adapter
+        Traverser dfsGraphTraveler = new DfsGraphTraverser(graphAdapter);
+        Traverser bfsGraphTraveler = new BfsGraphTraverser(graphAdapter);
+
+        // Perform traversals
         List<Integer> dfsPath = dfsGraphTraveler.traverse(1);
-        List<Integer> bfsTraveler = bfsGraphTraveler.traverse(1);
+        List<Integer> bfsPath = bfsGraphTraveler.traverse(1);
 
+        System.out.println("=== Step 1: Using JUNG with Adapter Pattern ===");
         System.out.println("Graph-DFS From node 1 is : " + dfsPath);
-        System.out.println("Graph-BFS From node 1 is : " + bfsTraveler);
-
-
+        System.out.println("Graph-BFS From node 1 is : " + bfsPath);
     }
 }
