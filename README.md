@@ -280,8 +280,8 @@ GraphTraverser/
 │ │ │ └── DfsGraphTraverser.java
 │ │ ├── Main.java
 │ │ └── MainJGraphT.java
-├── Adapter Implementation - 01/
-└── Library Change - 02/
+├── Adapter Implementation/
+└── Library Change/
 ```
 
 ## Dependencies
